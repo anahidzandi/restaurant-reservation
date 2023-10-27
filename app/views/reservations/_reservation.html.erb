@@ -1,0 +1,13 @@
+
+<tr>
+  <td><%= index %></td>
+  <td><%= reservation.name %></td>
+  <td><%= reservation.date %></td>
+  <td><%= "#{reservation.start_time.strftime("%I:%M %p")} to #{(reservation.start_time + 1.hour).strftime("%I:%M %p")}"  %></td>
+  <td><%= reservation.tables.pluck(:name).join(",") %></td>
+  <td><%= reservation.seating_capacity %></td>
+  <td><%= reservation.addition_information %></td>
+  <td>
+    <%= link_to "Delete", reservation_path(reservation.id), data: { method: :delete, confirm: 'Are you sure want to delete ?' }, class: 'btn btn-sm btn-danger' %>
+  </td>
+</tr>

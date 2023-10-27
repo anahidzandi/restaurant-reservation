@@ -1,0 +1,52 @@
+<%= form_with(model: reservation) do |form| %>
+  <% if reservation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+        <% reservation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block;font-weight:bold" %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block;font-weight:bold" %>
+    <%= form.date_field :date, class: 'form-control', required: true %>
+  </div>
+
+  <div>
+    <%= form.label :start_time, style: "display: block;font-weight:bold" %>
+    <%= form.time_field :start_time, class: 'form-control', value: "00:00:00" %>
+  </div>
+
+  <div>
+    <%= form.label :number_of_tables, style: "display: block;font-weight:bold" %>
+    <select name="reservation[table_ids][]" id="reservation_number_of_tables" class="form-control" onchange="showCapacity(event)" multiple required>
+      <% Table.all.each do |t| %>
+        <option value="<%= t.id %>" data-capacity="<%= t.capacity %>"><%= t.name %></option>
+      <% end %>
+    </select>
+    <%#= form.select :number_of_tables, Table.all.map { |x| [x.name, x.id]} , {}, {class: 'form-control',multiple: true} %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :seating_capacity, style: "display: block;font-weight:bold" %>
+    <%= form.number_field :seating_capacity, class: 'form-control', data: { target: 'bookings.capacity' }, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :addition_information, style: "display: block;font-weight:bold" %>
+    <%= form.text_area :addition_information, class: 'form-control', rows: 5 %>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <%= form.submit "Create Reservation", class: 'btn btn-primary mt-4', onclick: "submitForm(event)"%>
+  </div>
+<% end %>

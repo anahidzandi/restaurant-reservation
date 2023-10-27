@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2023-10-26
+  number_of_tables: 1
+  seating_capacity: 1
+  addition_information: MyText
+  start_time: 2023-10-26 18:09:56
+
+two:
+  name: MyString
+  date: 2023-10-26
+  number_of_tables: 1
+  seating_capacity: 1
+  addition_information: MyText
+  start_time: 2023-10-26 18:09:56
